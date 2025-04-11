@@ -101,7 +101,6 @@ interval <- no_steps_interval[index, "interval"]
 
 Time `R interval` has the highest number of steps
 
-
 ### Inputting missing values
 
 #### 1. Calculate and report the total number of NAs in steps col
@@ -110,10 +109,11 @@ Time `R interval` has the highest number of steps
 missing_data <- data[is.na(data$steps), "steps"]
 length_missing <- length(missing_data)
 ```
+
 There are `R length_missing` missing values in the data
 
-
 #### 2. Fill in the missing values with the mean of that interval
+
 ```{r}
 data_missing_filled <- data |> 
     left_join(no_steps_interval, 
@@ -124,11 +124,13 @@ data_missing_filled <- data |>
 ```
 
 #### 3. New df with NAs filled in
+
 ```{r}
 data_missing_filled
 ```
 
 #### 4. Histogram of total steps per day, mean and median
+
 ```{r}
 
 no_steps_day_missing_filled <- data_missing_filled |> 
@@ -146,7 +148,6 @@ median_missing_filled <- median(no_steps_day_missing_filled$total_steps)
 The updated mean and median after the NAs are filled with the daily average are `R mean_missing_filled` and `R median_missing_filled`
 
 Filling the NAs with the daily average has increased the mean and median slightly
-
 
 ### Difference in activity patterns between weekend and weekdays
 
@@ -166,6 +167,7 @@ data_missing_filled_wday
 ```
 
 #### 2. Panel plot of avrage steps taken per interval between weekend and weekday
+
 ```{r}
 no_steps_interval_NAfilled <- data_missing_filled_wday |> 
     group_by(interval, dayOrend) |> 
@@ -177,4 +179,3 @@ ggplot(no_steps_interval_NAfilled, aes(interval, average_steps)) +
     facet_wrap(~ dayOrend)
     
 ```
-
